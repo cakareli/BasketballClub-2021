@@ -1,15 +1,19 @@
-import { Column, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Training } from "../training/training";
+import { ApiProperty } from "@nestjsx/crud/lib/crud";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Equipment {
 
+    @ApiProperty()
     @PrimaryGeneratedColumn()
     id: number;
 
+    @ApiProperty()
     @Column()
     name: string;
 
+    @ApiProperty()
     @Column({nullable: true})
     amount: number;
+    
 }

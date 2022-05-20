@@ -1,32 +1,38 @@
+import { ApiProperty } from "@nestjsx/crud/lib/crud";
 import { TrainingStatus } from "src/constansts/training.status";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Coach } from "../coach/coach";
+import { Column, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Equipment } from "../equipment/equipment";
 import { Team } from "../team/team";
 
 @Entity()
 export class Training {
 
+    @ApiProperty()
     @PrimaryGeneratedColumn()
     id: number;
 
+    @ApiProperty()
     @Column()
     startTime: string;
 
+    @ApiProperty()
     @Column()
     endTime: string;
 
+    @ApiProperty()
     @ManyToOne(() => Team)
     @JoinTable()
     team: Team; 
 
+    @ApiProperty()
     @Column({
         type: "enum",
         enum: TrainingStatus
     })
     status: TrainingStatus;
 
-    @OneToMany(() => Equipment, equipment => equipment)
-    @JoinColumn()
-    equipment: Equipment[];    
+    // @ApiProperty()
+    // @OneToMany(() => Equipment, equipment => equipment)
+    // @JoinColumn()
+    // equipment: Equipment[];    
 }
