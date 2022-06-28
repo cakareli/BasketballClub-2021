@@ -1,7 +1,8 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { UserRole } from "src/constansts/user.roles";
+import { UserRole } from "../../constansts/user.roles";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Club } from "../club/club";
+import { Exclude } from "class-transformer";
 
 @Entity({name: 'users'})
 export class User {
@@ -26,6 +27,10 @@ export class User {
     @Column()
     lastName: string;
 
+    @Exclude()
+    @Column({nullable: true})
+    refreshToken: string
+
     @ApiProperty()
     @Column({
         type: "enum",
@@ -37,4 +42,6 @@ export class User {
     @ManyToOne(() => Club, {onDelete: 'SET NULL'})
     @JoinColumn({name: "clubId"})
     club: Club;
+
+
 }

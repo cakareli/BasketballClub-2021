@@ -8,6 +8,7 @@ async function bootstrap() {
   .setTitle('Basketaball Clubs')
   .setDescription('Basketaball Clubs API description')
   .setVersion('1.0')
+  .addTag('User')
   .addTag('Club')
   .addTag('Coach')
   .addTag('Equipment')
@@ -18,7 +19,6 @@ async function bootstrap() {
   .addTag('Team')
   .addTag('Therapy')
   .addTag('Training')
-  .addTag('User')
   .addTag('WorkTime')
   .build();
 
