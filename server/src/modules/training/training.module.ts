@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TrainingService } from './training.service';
 import { TrainingController } from './training.controller';
+import { Training } from './entities/training.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Training } from './training';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Training])],

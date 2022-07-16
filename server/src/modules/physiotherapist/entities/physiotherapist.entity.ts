@@ -1,14 +1,14 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Therapy } from "src/modules/therapy/entities/therapy.entity";
+import { User } from "src/modules/user/entities/user.entity";
+import { WorkTime } from "src/modules/worktime/entities/worktime.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Therapy } from "../therapy/therapy";
-import { User } from "../user/user";
-import { WorkTime } from "../worktime/worktime";
 
 @Entity()
 export class Physiotherapist {
 
     @ApiProperty()
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     physiotherapistId: number;
 
     @ApiProperty()

@@ -1,10 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { TeamType } from "src/constansts/team.type";
+import { Club } from "src/modules/club/entities/club.entity";
+import { Coach } from "src/modules/coach/entities/coach.entity";
+import { League } from "src/modules/league/entities/league.entity";
+import { Player } from "src/modules/player/entities/player.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Club } from "../club/club";
-import { Coach } from "../coach/coach";
-import { League } from "../league/league";
-import { Player } from "../player/player";
+
 
 @Entity()
 export class Team {
@@ -26,7 +27,7 @@ export class Team {
 
     @ApiProperty()
     @OneToMany(() => Player, player => player.team, {onDelete: 'SET NULL', nullable: true})
-    player: Player[];
+    players: Player[];
 
     @ApiProperty()
     @ManyToOne(() => Club)

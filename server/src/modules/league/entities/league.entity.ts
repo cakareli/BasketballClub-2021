@@ -1,13 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { TeamType } from "src/constansts/team.type";
+import { Team } from "src/modules/team/entities/team.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Team } from "../team/team";
 
 @Entity()
 export class League {
     
     @ApiProperty()
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: number;
 
     @ApiProperty()

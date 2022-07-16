@@ -1,16 +1,16 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
-import { Club } from "src/modules/club/club";
-import { Coach } from "src/modules/coach/coach";
-import { Equipment } from "src/modules/equipment/equipment";
-import { League } from "src/modules/league/league";
-import { Physiotherapist } from "src/modules/physiotherapist/physiotherapist";
-import { Player } from "src/modules/player/player";
-import { Staff } from "src/modules/staff/staff";
-import { Team } from "src/modules/team/team";
-import { Therapy } from "src/modules/therapy/therapy";
-import { Training } from "src/modules/training/training";
-import { User } from "src/modules/user/user";
-import { WorkTime } from "src/modules/worktime/worktime";
+import { Club } from "src/modules/club/entities/club.entity";
+import { Coach } from "src/modules/coach/entities/coach.entity";
+import { Equipment } from "src/modules/equipment/entities/equipment.entity";
+import { League } from "src/modules/league/entities/league.entity";
+import { Physiotherapist } from "src/modules/physiotherapist/entities/physiotherapist.entity";
+import { Player } from "src/modules/player/entities/player.entity";
+import { Staff } from "src/modules/staff/entities/staff.entity";
+import { Team } from "src/modules/team/entities/team.entity";
+import { Therapy } from "src/modules/therapy/entities/therapy.entity";
+import { Training } from "src/modules/training/entities/training.entity";
+import { User } from "src/modules/user/entities/user.entity";
+import { WorkTime } from "src/modules/worktime/entities/worktime.entity";
 
 export const typeormConfig: TypeOrmModuleOptions = {
     type: "postgres",
@@ -32,7 +32,8 @@ export const typeormConfig: TypeOrmModuleOptions = {
         Equipment, 
         Training, 
         Therapy, 
-        User],
+        User
+    ],
     migrations: [],
     subscribers: [],
 }

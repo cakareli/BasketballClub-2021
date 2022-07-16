@@ -1,16 +1,16 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { type } from "os";
 import { PlayerPosition } from "src/constansts/player.positions";
+import { Team } from "src/modules/team/entities/team.entity";
+import { Therapy } from "src/modules/therapy/entities/therapy.entity";
+import { User } from "src/modules/user/entities/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Team } from "../team/team";
-import { Therapy } from "../therapy/therapy";
-import { User } from "../user/user";
+
 
 @Entity()
 export class Player  {
 
     @ApiProperty()
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     playerId: number;
 
     @ApiProperty()

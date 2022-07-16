@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Physiotherapist } from "src/modules/physiotherapist/entities/physiotherapist.entity";
+import { Player } from "src/modules/player/entities/player.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Physiotherapist } from "../physiotherapist/physiotherapist";
-import { Player } from "../player/player";
 
 @Entity()
 export class Therapy {

@@ -1,5 +1,6 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { UpdateUserDto } from '../user/dto/update-user.dto';
 import { UserService } from '../user/user.service';
 import { jwtConstants } from './constants';
 
@@ -21,13 +22,16 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { username: user.email, sub: user.id, role: user.role };
+    const access_token = this.jwtService.sign(payload,
+      { secret: jwtConstants.accessSecret,
+        expiresIn: jwtConstants.accessExp });
+    const refresh_token = this.jwtService.sign(payload,
+      {secret: jwtConstants.refreshSecret,
+        expiresIn: jwtConstants.refreshExp,}) 
+    this.usersService.update(user.id, {refreshToken: refresh_token})
     return {
-      access_token: this.jwtService.sign(payload,
-         { secret: jwtConstants.accessSecret,
-           expiresIn: jwtConstants.accessExp }),
-      refresh_token: this.jwtService.sign(payload,
-         {secret: jwtConstants.refreshSecret,
-           expiresIn: jwtConstants.refreshExp,}) 
+      access_token: access_token,
+      refresh_token: refresh_token 
     };
   }
 
@@ -35,15 +39,16 @@ export class AuthService {
     const user = await this.usersService.findOne(userId);
     if(user && refreshToken === user.refreshToken ){
       const payload = { username: user.email, sub: user.id, role: user.role };
-
+      const access_token = this.jwtService.sign(payload,
+        { secret: jwtConstants.accessSecret,
+          expiresIn: jwtConstants.accessExp });
+      const refresh_token = this.jwtService.sign(payload,
+        {secret: jwtConstants.refreshSecret,
+          expiresIn: jwtConstants.refreshExp,}) 
+      this.usersService.update(user.id, {refreshToken: refresh_token})
       return {
-        access_token: this.jwtService.sign(payload,
-           { secret: jwtConstants.accessSecret,
-            expiresIn: jwtConstants.accessExp }),
-        refresh_token: this.jwtService.sign(payload,
-           {secret: jwtConstants.refreshSecret,
-            expiresIn: jwtConstants.refreshExp,
-        }) 
+        access_token: access_token,
+        refresh_token: refresh_token 
       };
     }else{
       throw new ForbiddenException("Access denied");
