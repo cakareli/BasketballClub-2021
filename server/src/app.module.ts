@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppController } from './app.controller';
 import { typeormConfig } from './config/typeorm.config';
+import { AuthModule } from './modules/auth/auth.module';
 import { ClubModule } from './modules/club/club.module';
 import { CoachModule } from './modules/coach/coach.module';
 import { EquipmentModule } from './modules/equipment/equipment.module';
@@ -16,19 +18,20 @@ import { WorktimeModule } from './modules/worktime/worktime.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeormConfig),
-    PlayerModule, 
-    UserModule, 
-    ClubModule, 
-    LeagueModule, 
-    CoachModule, 
-    EquipmentModule, 
-    PhysiotherapistModule,
     PlayerModule,
+    UserModule,
+    ClubModule, 
+    LeagueModule,
+    CoachModule,
+    EquipmentModule,
+    PhysiotherapistModule,
     StaffModule,
     TeamModule,
     TherapyModule,
     TrainingModule,
-    WorktimeModule
+    WorktimeModule,
+    AuthModule,
   ],
+  controllers: [AppController],
   })
 export class AppModule {}

@@ -1,7 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { User } from "src/modules/user/entities/user.entity";
+import { WorkTime } from "src/modules/worktime/entities/worktime.entity";
 import { Entity, ManyToOne, JoinColumn, Column, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "../user/user";
-import { WorkTime } from "../worktime/worktime";
+
 
 @Entity()
 export class Staff {

@@ -1,14 +1,15 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { CoachTypes } from "src/constansts/coach.types";
+import { Team } from "src/modules/team/entities/team.entity";
+import { User } from "src/modules/user/entities/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Team } from "../team/team";
-import { User } from "../user/user";
+
 
 @Entity()
 export class Coach {
 
     @ApiProperty()
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     coachId: number;
 
     @ApiProperty()

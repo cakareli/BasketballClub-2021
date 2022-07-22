@@ -1,8 +1,8 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
 import { TrainingStatus } from "src/constansts/training.status";
+import { Team } from "src/modules/team/entities/team.entity";
 import { Column, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Equipment } from "../equipment/equipment";
-import { Team } from "../team/team";
+
 
 @Entity()
 export class Training {
