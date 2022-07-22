@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React, { createContext, useContext } from 'react';
+import LoginForm from './components/LoginForm'
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import ErrorPage from './components/utils/ErrorPage';
+import HomePage from './components/commons/HomePage';
+
 
 function App() {
+
+  const accessToken = localStorage.getItem("accessToken")
+  const authObj = JSON.stringify(accessToken)
+  console.log("LocalStorage accessToken: "+authObj)
+  console.log("Context accessToken: "+accessToken)
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContext.Provider value={accessToken}>
+      <Router>
+        <Routes>
+          <Route path='/login' element={<LoginForm/>}></Route>
+          <Route path='/' element={ accessToken == "null" ? <Navigate to="/login"/> : <HomePage/>}></Route>
+          <Route path="*" element={<ErrorPage/>}></Route>
+        </Routes>
+      </Router>
+    </AuthContext.Provider>
   );
 }
-
+export const AuthContext = createContext({})
 export default App;
+
+
+
