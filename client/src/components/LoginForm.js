@@ -28,7 +28,6 @@ function LoginForm() {
             console.log("Access Token: "+obj.access_token)
             console.log("Refresh Token: "+obj.refresh_token)
             const accessToken = obj.access_token;
-            const refreshToken = obj.refresh_token;
             if(accessToken){
                 const decodedToken = jwtDecode(accessToken)
                 const decodedTokenJson = JSON.stringify(decodedToken)
@@ -37,6 +36,7 @@ function LoginForm() {
                 localStorage.setItem("accessToken", accessToken)
                 localStorage.setItem("id",obj.sub)
                 localStorage.setItem("role",obj.role)
+                
             }else{
                 console.log("There is no token")
             }

@@ -8,6 +8,8 @@ function HomePage() {
 
     function LogOut() {
         localStorage.setItem("accessToken",null)
+        localStorage.setItem("role",null)
+        localStorage.setItem("id",null)
         navigator("/login")
     }
     return (

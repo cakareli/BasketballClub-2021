@@ -9,21 +9,16 @@ import HomePage from './components/commons/HomePage';
 function App() {
 
   const accessToken = localStorage.getItem("accessToken")
-  const authObj = JSON.stringify(accessToken)
-  console.log("LocalStorage accessToken: "+authObj)
-  console.log("Context accessToken: "+accessToken)
-
+  console.log("LocalStorage accessToken: "+accessToken)
 
   return (
-    <AuthContext.Provider value={accessToken}>
       <Router>
         <Routes>
           <Route path='/login' element={<LoginForm/>}></Route>
-          <Route path='/' element={ accessToken == "null" ? <Navigate to="/login"/> : <HomePage/>}></Route>
+          <Route path='/' element={ accessToken == null ? <Navigate to="/login"/> : <HomePage/>}></Route>
           <Route path="*" element={<ErrorPage/>}></Route>
         </Routes>
       </Router>
-    </AuthContext.Provider>
   );
 }
 export const AuthContext = createContext({})
