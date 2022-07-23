@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 function HomePage() {
 
     let navigator = useNavigate()
-    const role = localStorage.getItem("role")
+    const {value, setValue} = useContext(UserContext)
+    const currentUser = localStorage.getItem("currentUser")
+    var role;
+    if(currentUser){
+        const userObj = JSON.parse(currentUser)
+        role = userObj.role
+    }
+    
 
     function LogOut() {
-        localStorage.setItem("accessToken",null)
-        localStorage.setItem("role",null)
-        localStorage.setItem("id",null)
-        navigator("/login")
+        localStorage.removeItem("currentUser");
+        setValue(null)
+        navigator("/")
     }
     return (
         <div>

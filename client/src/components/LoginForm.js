@@ -1,7 +1,8 @@
-import React, { useState} from 'react'
+import React, { useState , useContext} from 'react'
 import axios from '../api/axios';
 import jwtDecode from 'jwt-decode'; 
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 
 const LOGIN_URL = '/auth/login';
@@ -11,6 +12,7 @@ function LoginForm() {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     let navigate = useNavigate()
+    const {value, setValue} = useContext(UserContext)
 
     const submitHandler = async e =>  {
         e.preventDefault();
@@ -25,17 +27,19 @@ function LoginForm() {
             console.log(JSON.stringify(response?.data));
             const data = JSON.stringify(response?.data);
             var obj = JSON.parse(data);
-            console.log("Access Token: "+obj.access_token)
-            console.log("Refresh Token: "+obj.refresh_token)
             const accessToken = obj.access_token;
             if(accessToken){
                 const decodedToken = jwtDecode(accessToken)
                 const decodedTokenJson = JSON.stringify(decodedToken)
                 var obj = JSON.parse(decodedTokenJson);
-                console.log("Role: "+obj.role)
-                localStorage.setItem("accessToken", accessToken)
-                localStorage.setItem("id",obj.sub)
-                localStorage.setItem("role",obj.role)
+                const userObj = {
+                    accessToken : accessToken,
+                    id : obj.sub, 
+                    role : obj.role
+                }
+                const userObjJson = JSON.stringify(userObj)
+                localStorage.setItem("currentUser", userObjJson)
+                setValue(obj)
                 
             }else{
                 console.log("There is no token")
