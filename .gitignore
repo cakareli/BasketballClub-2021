@@ -4,6 +4,13 @@
 # Log file
 *.log
 
+# package-lock
+package-lock.json
+
+# compiled output
+/dist
+/node_modules
+
 # BlueJ files
 *.ctxt
 
